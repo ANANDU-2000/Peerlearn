@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="selection-container">
+    <div class="card learner-card">
+        <img src="{% static 'images/learner_icon.png' %}" alt="Learner Icon">
+        <h2>Learner</h2>
+        <p>Learn new skills and achieve your goals.</p>
+        <a href="{% url 'learner_register' %}" class="select-button">Select</a>
+    </div>
+    <div class="card mentor-card">
+        <img src="{% static 'images/mentor_icon.png' %}" alt="Mentor Icon">
+        <h2>Mentor</h2>
+        <p>Share your expertise and guide others.</p>
+        <a href="{% url 'mentor_register' %}" class="select-button">Select</a>
+    </div>
+</div>
+
+<style>
+    /* Add your CSS for card styling, hover effects, and animations here */
+    .selection-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        min-height: 100vh;
+        gap: 2rem; /* Space between cards */
+    }
+    .card {
+        /* Basic card styling */
+        width: 300px;
+        height: 400px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease; /* Smooth transition for hover effect */
+        cursor: pointer; /* Change cursor to indicate clickability */
+    }
+    .card:hover {
+        transform: scale(1.05); /* Slightly enlarge card on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    /* ... more styles ... */
+</style>
+
+{% endblock %}
