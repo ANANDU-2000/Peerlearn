@@ -1,44 +1,66 @@
-/* static/css/base.css */
-:root {
-    --primary-color: #4f46e5;
-    --secondary-color: #06b6d4;
-    --accent-color: #8b5cf6;
-    --text-light: #f3f4f6;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-}
-
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-    background: linear-gradient(-45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    overflow-x: hidden;
-    color: var(--text-light);
-    position: relative;
+    background: #0e0e0e;
+    color: white;
+    overflow: hidden;
 }
 
+/* Flex Utilities */
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container */
 .container {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-    gap: 2rem;
-    padding: 2rem;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
-/* Media queries */
-@media (max-width: 1024px) {
-    .container {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-primary {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #ff4d4d;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    font-size: 14px;
+    color: #aaaaaa;
 }

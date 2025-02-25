@@ -1,16 +1,119 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/mentor_register.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Mentor Registration</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+<div class="auth-page" id="auth-page">
+    <div class="register-container">
+        <div class="split-layout">
+            <!-- Left: Impactful Messages -->
+            <div class="impact-section">
+                <h1>Inspire & Thrive</h1>
+                <p class="impact-msg">"Join <span class='highlight'>50K+ mentors</span>—Impact millions."</p>
+                <p class="impact-msg">"Earn big—Grow your influence."</p>
+                <p class="impact-msg">"Shape the future, one learner at a time."</p>
+            </div>
 
-<style>
-    /* Add your CSS for the form here */
-</style>
+            <!-- Right: Simple Form -->
+            <div class="form-container">
+                <form method="post" enctype="multipart/form-data" class="glass-form" id="mentor-form">
+                    {% csrf_token %}
+                    <h2 class="title">Mentor Sign Up</h2>
+                    <div class="form-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="full_name" id="id_full_name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" id="id_email" placeholder="Your email" required>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" id="id_password" placeholder="Create password" required>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-book"></i>
+                        <input type="text" name="expertise" id="id_expertise" placeholder="e.g., Python" required>
+                        <div class="suggestions" id="expertise-suggestions"></div>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-rupee-sign"></i>
+                        <input type="number" name="price" id="id_price" placeholder="e.g., 799" min="399" required>
+                    </div>
+                    <input type="submit" value="Join Now" class="form-btn solid">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const authPage = document.getElementById('auth-page');
+        const fields = document.querySelectorAll('.form-field');
+        const impactMsgs = document.querySelectorAll('.impact-msg');
+        
+        authPage.style.opacity = '0';
+        authPage.style.transform = 'translateY(20px)';
+        fields.forEach(field => {
+            field.style.opacity = '0';
+            field.style.transform = 'translateY(20px)';
+        });
+        impactMsgs.forEach(msg => {
+            msg.style.opacity = '0';
+            msg.style.transform = 'translateX(-20px)';
+        });
+
+        setTimeout(() => {
+            authPage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            authPage.style.opacity = '1';
+            authPage.style.transform = 'translateY(0)';
+            fields.forEach((field, index) => {
+                setTimeout(() => {
+                    field.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    field.style.opacity = '1';
+                    field.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            impactMsgs.forEach((msg, index) => {
+                setTimeout(() => {
+                    msg.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    msg.style.opacity = '1';
+                    msg.style.transform = 'translateX(0)';
+                }, index * 200);
+            });
+        }, 50);
+
+        // Searchable expertise
+        const expertiseInput = document.getElementById('id_expertise');
+        const suggestionsBox = document.getElementById('expertise-suggestions');
+        const domains = [
+            "Python", "JavaScript", "Web Development", "Machine Learning", 
+            "Data Analysis", "UI/UX Design", "Cybersecurity", "Cloud Computing", 
+            "Blockchain", "Digital Marketing", "Game Development", "DevOps",
+            "Java", "Networking", "SEO", "Mobile Apps"
+        ];
+
+        expertiseInput.addEventListener('input', () => {
+            const value = expertiseInput.value.toLowerCase();
+            suggestionsBox.innerHTML = '';
+            if (value) {
+                const filtered = domains.filter(domain => domain.toLowerCase().includes(value));
+                filtered.forEach(domain => {
+                    const suggestion = document.createElement('div');
+                    suggestion.classList.add('suggestion-item');
+                    suggestion.textContent = domain;
+                    suggestion.addEventListener('click', () => {
+                        expertiseInput.value = domain;
+                        suggestionsBox.innerHTML = '';
+                    });
+                    suggestionsBox.appendChild(suggestion);
+                });
+            }
+        });
+    });
+</script>
 {% endblock %}

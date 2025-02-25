@@ -1,16 +1,119 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/learner_register.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Learner Registration</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}  </form>
-    <button type="submit">Register</button>
-</form>
+<div class="auth-page" id="auth-page">
+    <div class="register-container">
+        <div class="split-layout">
+            <!-- Left: Impactful Messages -->
+            <div class="impact-section">
+                <h1>Your Future Awaits</h1>
+                <p class="impact-msg">"Learn from <span class='highlight'>50K+ mentors</span>—Trusted by 10M+."</p>
+                <p class="impact-msg">"95% of learners land dream careers."</p>
+                <p class="impact-msg">"Grow with live expertise."</p>
+            </div>
 
-<style>
-    /* Add your CSS for the form here */
-</style>
+            <!-- Right: Simple Form -->
+            <div class="form-container">
+                <form method="post" enctype="multipart/form-data" class="glass-form" id="learner-form">
+                    {% csrf_token %}
+                    <h2 class="title">Learner Sign Up</h2>
+                    <div class="form-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="full_name" id="id_full_name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" id="id_email" placeholder="Your email" required>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" id="id_password" placeholder="Create password" required>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-book"></i>
+                        <input type="text" name="domains" id="id_domains" placeholder="e.g., Web Development" required>
+                        <div class="suggestions" id="domain-suggestions"></div>
+                    </div>
+                    <div class="form-field">
+                        <i class="fas fa-bullseye"></i>
+                        <input type="text" name="goal" id="id_goal" placeholder="e.g., Become a Developer" required>
+                    </div>
+                    <input type="submit" value="Join Now" class="form-btn solid">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const authPage = document.getElementById('auth-page');
+        const fields = document.querySelectorAll('.form-field');
+        const impactMsgs = document.querySelectorAll('.impact-msg');
+        
+        authPage.style.opacity = '0';
+        authPage.style.transform = 'translateY(20px)';
+        fields.forEach(field => {
+            field.style.opacity = '0';
+            field.style.transform = 'translateY(20px)';
+        });
+        impactMsgs.forEach(msg => {
+            msg.style.opacity = '0';
+            msg.style.transform = 'translateX(-20px)';
+        });
+
+        setTimeout(() => {
+            authPage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            authPage.style.opacity = '1';
+            authPage.style.transform = 'translateY(0)';
+            fields.forEach((field, index) => {
+                setTimeout(() => {
+                    field.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    field.style.opacity = '1';
+                    field.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            impactMsgs.forEach((msg, index) => {
+                setTimeout(() => {
+                    msg.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    msg.style.opacity = '1';
+                    msg.style.transform = 'translateX(0)';
+                }, index * 200);
+            });
+        }, 50);
+
+        // Searchable domains
+        const domainInput = document.getElementById('id_domains');
+        const suggestionsBox = document.getElementById('domain-suggestions');
+        const domains = [
+            "Web Development", "Mobile Development", "Data Science", "Machine Learning", 
+            "Artificial Intelligence", "Graphic Design", "UI/UX Design", "Cybersecurity", 
+            "Cloud Computing", "Blockchain", "Game Development", "Digital Marketing",
+            "Python", "JavaScript", "DevOps", "Networking"
+        ];
+
+        domainInput.addEventListener('input', () => {
+            const value = domainInput.value.toLowerCase();
+            suggestionsBox.innerHTML = '';
+            if (value) {
+                const filtered = domains.filter(domain => domain.toLowerCase().includes(value));
+                filtered.forEach(domain => {
+                    const suggestion = document.createElement('div');
+                    suggestion.classList.add('suggestion-item');
+                    suggestion.textContent = domain;
+                    suggestion.addEventListener('click', () => {
+                        domainInput.value = domain;
+                        suggestionsBox.innerHTML = '';
+                    });
+                    suggestionsBox.appendChild(suggestion);
+                });
+            }
+        });
+    });
+</script>
 {% endblock %}

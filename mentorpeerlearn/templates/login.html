@@ -1,4 +1,64 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h1>Login</h1>
-    {% endblock %}
+<div class="auth-page" id="auth-page">
+    <div class="register-container">
+        <div class="form-container">
+            <form method="post" class="glass-form" id="login-form">
+                {% csrf_token %}
+                <h2 class="title">Sign In to PeerLearn</h2>
+                <p class="subtitle">"Join 10M+ learners and mentors—Trusted worldwide."</p>
+                <div class="form-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="username" id="id_username" placeholder="Username" required>
+                </div>
+                <div class="form-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" id="id_password" placeholder="Password" required>
+                </div>
+                <input type="submit" value="Login" class="form-btn solid">
+                <p class="social-text">Or sign in with</p>
+                <div class="social-media">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p class="signup-link">New here? <a href="{% url 'register' %}">Sign up now</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const authPage = document.getElementById('auth-page');
+        const fields = document.querySelectorAll('.form-field');
+        
+        authPage.style.opacity = '0';
+        authPage.style.transform = 'translateY(20px)';
+        fields.forEach(field => {
+            field.style.opacity = '0';
+            field.style.transform = 'translateY(20px)';
+        });
+
+        setTimeout(() => {
+            authPage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            authPage.style.opacity = '1';
+            authPage.style.transform = 'translateY(0)';
+            fields.forEach((field, index) => {
+                setTimeout(() => {
+                    field.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    field.style.opacity = '1';
+                    field.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }, 50);
+    });
+</script>
+{% endblock %}

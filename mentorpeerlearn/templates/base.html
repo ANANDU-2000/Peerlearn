@@ -1,40 +1,39 @@
-<!-- templates/base.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PeerLearn - Modern Learning Platform{% endblock %}</title>
+    <meta name="description" content="PeerLearn - Live 1:1 Mentorship & Courses to Master Skills and Land Jobs">
+    <meta name="keywords" content="live mentorship, online courses, learning community, PeerLearn">
+    <title>{% block title %}PeerLearn - Learn Smarter, Succeed Faster{% endblock %}</title>
     
     <!-- Fonts and Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Static Files -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/landing.css' %}"> 
+    <!-- Static CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
     <link rel="stylesheet" href="{% static 'css/animations.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/learner_register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mentor_register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <div class="animated-bg">
-        <div class="floating-shapes">
-            {% block shapes %}{% endblock %}
-        </div>
-    </div>
-
+    <div class="page-transition"></div>
+    <!-- Main Content -->
     <div class="container">
         {% block content %}{% endblock %}
     </div>
 
-    <script src="{% static 'js/main.js' %}"></script>
-    {% block extra_js %}{% endblock %}
-    {% block footer %}  <footer>
-        <p>&copy; 2024 PeerLearn</p>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2025 PeerLearn. All Rights Reserved.</p>
     </footer>
-{% endblock %}
+
+    <script src="{% static 'js/landing.js' %}"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

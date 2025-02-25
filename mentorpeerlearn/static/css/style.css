@@ -74,14 +74,23 @@ body {
 }
 
 .container {
-    position: relative;
-    z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr;
     min-height: 100vh;
     gap: 2rem;
     padding: 2rem;
+    align-items: center;
+    justify-content: end; /* Pushes right-section more to the right */
 }
+
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-left: auto; /* Ensures it moves fully right */
+}
+
 
 .left-section {
     display: flex;

@@ -1,34 +1,319 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block shapes %}
-<div class="shape shape-1"></div>
-<div class="shape shape-2"></div>
-<div class="shape shape-3"></div>
-{% endblock %}
-
 {% block content %}
-<div class="landing-container">
-    <section class="left-section">
-        <div class="content-wrapper">
-            <div class="brand">PeerLearn</div>
-            <h1 class="hero-title">Unlock Your Potential</h1>
-            <p class="hero-subtitle">"The mind is not a vessel to be filled, but a fire to be kindled." - Plutarch</p>
-            <div class="auth-buttons">
-                <a href="{% url 'register' %}" class="btn-primary">Register</a>
-                <a href="{% url 'login' %}" class="btn-secondary">Login</a>
+<div class="main-wrapper">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="/" class="nav-logo">
+                <i class="fas fa-graduation-cap nav-logo-icon"></i>
+                <span class="nav-logo-text">PeerLearn</span>
+            </a>
+
+            <!-- Toggle (Mobile) -->
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars nav-toggle-menu"></i>
+                <i class="fas fa-times nav-toggle-close"></i>
             </div>
-            <div class="social-login">
-                <p>Or connect with:</p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Menu -->
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link"><i class="fas fa-briefcase nav-icon"></i> Explore Career</a></li>
+                    <li class="nav-search">
+                        <input type="text" placeholder="Search..." class="search-input" aria-label="Search">
+                        <i class="fas fa-search search-icon"></i>
+                        <i class="fas fa-filter filter-icon" title="Filter"></i>
+                    </li>
+                    <li><a href="#" class="nav-link"><i class="fas fa-book-open nav-icon"></i> Courses</a></li>
+                    <li class="nav-dropdown">
+                        <div class="nav-link nav-dropdown-btn">
+                            <i class="fas fa-layer-group nav-icon"></i> Domains
+                            <i class="fas fa-chevron-down nav-arrow"></i>
+                        </div>
+                        <div class="nav-dropdown-content">
+                            <div class="nav-dropdown-grid">
+                                <div class="nav-dropdown-group">
+                                    <i class="fas fa-code"></i>
+                                    <span>Programming</span>
+                                    <ul>
+                                        <li><a href="#">Python</a></li>
+                                        <li><a href="#">JavaScript</a></li>
+                                        <li><a href="#">Java</a></li>
+                                        <li><a href="#">C++</a></li>
+                                    </ul>
+                                </div>
+                                <div class="nav-dropdown-group">
+                                    <i class="fas fa-brain"></i>
+                                    <span>AI & ML</span>
+                                    <ul>
+                                        <li><a href="#">Machine Learning</a></li>
+                                        <li><a href="#">Deep Learning</a></li>
+                                        <li><a href="#">NLP</a></li>
+                                    </ul>
+                                </div>
+                                <div class="nav-dropdown-group">
+                                    <i class="fas fa-database"></i>
+                                    <span>Data Science</span>
+                                    <ul>
+                                        <li><a href="#">Data Analysis</a></li>
+                                        <li><a href="#">SQL</a></li>
+                                        <li><a href="#">Statistics</a></li>
+                                    </ul>
+                                </div>
+                                <div class="nav-dropdown-group">
+                                    <i class="fas fa-paint-brush"></i>
+                                    <span>Design</span>
+                                    <ul>
+                                        <li><a href="#">UI/UX</a></li>
+                                        <li><a href="#">Graphic Design</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#" class="nav-link nav-chat"><i class="fas fa-comments nav-icon"></i></a></li>
+                    <li><a href="{% url 'login' %}" class="nav-link nav-login"><i class="fas fa-user nav-icon"></i> Login</a></li>
+                    <li><a href="{% url 'register' %}" class="nav-link nav-join"><i class="fas fa-sign-in-alt nav-icon"></i> Join Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Learn <span class="highlight">Live</span>, Master Skills, Land Your Dream Job</h1>
+                <p class="hero-subtitle">"Personalized 1:1 Mentorship + Top Courses + Global Community."</p>
+                <div class="hero-stats">
+                    <span>10M+ Learners</span> | <span>50K+ Mentors</span> | <span>100K+ Lessons</span>
+                </div>
+                <a href="{% url 'register' %}" class="hero-cta">Start Learning Now</a>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <img src="{% static 'images/hero-live.png' %}" alt="Live Mentorship" class="hero-img live">
+                    <img src="{% static 'images/hero-course.png' %}" alt="Course Learning" class="hero-img course">
                 </div>
             </div>
         </div>
     </section>
-    <section class="right-section">
-        <img src="{% static 'images/hero-image.png' %}" alt="Learning Illustration" class="hero-image">
+
+    <!-- Discover Real Skills & Mentors -->
+   <!-- Explore Top Skills -->
+<section class="courses-section">
+    <h2 class="section-title">Explore Top Courses</h2>
+    <div class="courses-grid">
+        <div class="course-card">
+            <div class="card-thumbnail" style="background-image: url('{% static 'images/python-thumb.jpg' %}');"></div>
+            <div class="card-content">
+                <h3>Python for Beginners</h3>
+                <p class="card-mentor">Akash Patel</p>
+                <div class="card-rating">
+                    <i class="fas fa-star"></i> 4.9
+                    <span class="card-learners">7M+ Learners</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">$5</span>
+                    <i class="fas fa-crown premium-badge"></i>
+                    <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                </div>
+            </div>
+            <a href="#" class="card-btn">Enroll Now</a>
+        </div>
+        <div class="course-card">
+            <div class="card-thumbnail" style="background-image: url('{% static 'images/ml-thumb.jpg' %}');"></div>
+            <div class="card-content">
+                <h3>Machine Learning Basics</h3>
+                <p class="card-mentor">Sarah Kim</p>
+                <div class="card-rating">
+                    <i class="fas fa-star"></i> 4.8
+                    <span class="card-learners">8M+ Learners</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">$8</span>
+                    <i class="fas fa-crown premium-badge"></i>
+                    <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                </div>
+            </div>
+            <a href="#" class="card-btn">Enroll Now</a>
+        </div>
+        <div class="course-card">
+            <div class="card-thumbnail" style="background-image: url('{% static 'images/ds-thumb.jpg' %}');"></div>
+            <div class="card-content">
+                <h3>Data Science Essentials</h3>
+                <p class="card-mentor">Rajesh Kumar</p>
+                <div class="card-rating">
+                    <i class="fas fa-star"></i> 4.7
+                    <span class="card-learners">3M+ Learners</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">$6</span>
+                    <i class="fas fa-crown premium-badge"></i>
+                    <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                </div>
+            </div>
+            <a href="#" class="card-btn">Enroll Now</a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+                <!-- Trending Courses -->
+                <div class="discover-card course-card">
+                    <h3>Python Basics</h3>
+                    <p class="card-skill">7M+ Learners</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i> 4.7 (50K reviews)
+                    </div>
+                    <p class="card-price">$5</p>
+                    <a href="#" class="card-btn">Start Free</a>
+                </div>
+                <div class="discover-card course-card">
+                    <h3>Data Science Intro</h3>
+                    <p class="card-skill">3M+ Learners</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i> 4.6 (20K reviews)
+                    </div>
+                    <p class="card-price">$8</p>
+                    <a href="#" class="card-btn">Start Free</a>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <!-- Top Courses -->
+    <section class="courses-section">
+        <h2 class="section-title">Explore Top Skills</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <h3>Python</h3>
+                <p>7M+ Learners</p>
+                <a href="#" class="course-btn">Start Free</a>
+            </div>
+            <div class="course-card">
+                <h3>Machine Learning</h3>
+                <p>8M+ Learners</p>
+                <a href="#" class="course-btn">Start Free</a>
+            </div>
+            <div class="course-card">
+                <h3>Data Science</h3>
+                <p>3M+ Learners</p>
+                <a href="#" class="course-btn">Start Free</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Learn Section -->
+    <section class="why-learn-section">
+        <div class="why-learn-container">
+            <h2 class="section-title">Why Learn with PeerLearn?</h2>
+            <div class="why-learn-grid">
+                <div class="why-learn-card">
+                    <i class="fas fa-video card-icon"></i>
+                    <h3>Live Mentorship</h3>
+                    <p>1:1 guidance from top experts in real-time.</p>
+                </div>
+                <div class="why-learn-card">
+                    <i class="fas fa-book-open card-icon"></i>
+                    <h3>Top Courses</h3>
+                    <p>Master skills with world-class, on-demand content.</p>
+                </div>
+                <div class="why-learn-card">
+                    <i class="fas fa-comments card-icon"></i>
+                    <h3>Global Community</h3>
+                    <p>Connect, collaborate, and grow with learners worldwide.</p>
+                </div>
+            </div>
+            <div class="why-learn-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="95">0</span>%
+                    <p>Job Placement Rate</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50000">0</span>+
+                    <p>Expert Mentors</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100000">0</span>+
+                    <p>Lessons Completed</p>
+                </div>
+            </div>
+            <div class="why-learn-testimonial">
+                <div class="testimonial-content">
+                    <p>"PeerLearn’s live mentors helped me land my dream job in 3 months!"</p>
+                    <span class="testimonial-author">— Priya S., Software Engineer</span>
+                </div>
+            </div>
+            <a href="#" class="why-learn-cta">Browse Mentors Now</a>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-section">
+        <h2 class="section-title">Trusted By</h2>
+        <div class="partners-grid">
+            <img src="{% static 'images/vw.png' %}" alt="Volkswagen" class="partner-logo">
+            <img src="{% static 'images/samsung.png' %}" alt="Samsung" class="partner-logo">
+            <img src="{% static 'images/cisco.png' %}" alt="Cisco" class="partner-logo">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2025 PeerLearn. All Rights Reserved.</p>
+    </footer>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show-menu');
+        navToggle.classList.toggle('show-icon');
+    });
+
+    const dropdowns = document.querySelectorAll('.nav-dropdown');
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', () => {
+            dropdown.classList.toggle('show-dropdown');
+        });
+    });
+
+    // Hero image toggle
+    let isLive = true;
+    setInterval(() => {
+        document.querySelector('.hero-img.live').style.opacity = isLive ? 0 : 1;
+        document.querySelector('.hero-img.course').style.opacity = isLive ? 1 : 0;
+        isLive = !isLive;
+    }, 3000);
+
+    // Stats animation
+    document.addEventListener('DOMContentLoaded', () => {
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            let count = 0;
+            const increment = target / 100;
+            const updateCount = () => {
+                if (count < target) {
+                    count += increment;
+                    stat.textContent = Math.round(count);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    stat.textContent = target.toLocaleString() + (stat.textContent.includes('%') ? '%' : '+');
+                }
+            };
+            updateCount();
+        });
+    });
+</script>
 {% endblock %}
